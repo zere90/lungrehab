@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Урок 3 — Физическая активность</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<script src="auth-check.js"></script>
+<style>
+  body{
+    background-image: url("https://cdn.pixabay.com/photo/2020/02/13/05/53/coronavirus-4844592_1280.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+    body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    pointer-events: none;
+    z-index: -1;
+  }
+    /* БЕЛЫЙ ТЕКСТ НА ТЕМНОМ ФОНЕ */
+    .section-title {
+      color: #ffffff !important;
+      text-shadow: 0 6px 20px rgba(0,0,0,0.9);
+    }
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container header-inner">
+    <div class="logo">
+      <a href="index.html">Реабилитация лёгких</a>
+    </div>
+    <nav class="nav">
+      <a href="index.html">Главная</a>
+      <a href="education.html">Обучение</a>
+      <a href="news.html">Новости</a> 
+      <a href="profile.html">Личный кабинет</a>
+    </nav>
+    <div class="burger" onclick="toggleMenu()">☰</div>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Главная</a>
+    <a href="education.html">Обучение</a>
+    <a href="news.html">Новости</a> 
+    <a href="profile.html">Личный кабинет</a>
+  </div>
+</header>
+
+<section class="container" style="padding:80px 0;">
+
+  <h1 class="section-title">Урок 3. Физическая активность</h1>
+
+  <div class="lesson-box">
+    <h3>🎯 Цели урока</h3>
+    <ul>
+      <li>Понять роль физической активности в восстановлении</li>
+      <li>Научиться безопасно увеличивать нагрузки</li>
+      <li>Составить индивидуальный план упражнений</li>
+    </ul>
+  </div>
+
+  <div class="lesson-box">
+    <h3>Принципы физической реабилитации</h3>
+    <h4>1. Постепенность</h4>
+    <ul>
+      <li>Начинайте с минимальных нагрузок</li>
+      <li>Увеличивайте интенсивность на 10-15% в неделю</li>
+</ul>
+
+    <h4>Не форсируйте события</li>
+    <h4>2. Регулярность</h4>
+    <ul>
+      <li>Лучше короткие ежедневные занятия, чем редкие длинные</li>
+      <li>Минимум 3-5 раз в неделю</li>
+</ul>
+
+    <h4>Создайте расписание и придерживайтесь его</li>
+    <h4>3. Индивидуализация</h4>
+    <ul>
+      <li>Учитывайте возраст, сопутствующие заболевания</li>
+      <li>Адаптируйте под текущее состояние</li>
+</ul>
+
+    <h4>Консультируйтесь с врачом</li>
+    <h4>4. Безопасность</h4>
+    <ul>
+      <li>Следите за симптомами тревоги</li>
+      <li>Используйте пульсоксиметр</li>
+</ul>
+
+    <h4>Держите при себе телефон</li>
+  </div>
+
+  <div class="lesson-box">
+    <h3>НЕДЕЛЯ 1-2: Минимальная активность</h3>
+    <h4>Ходьба:</h4>
+    <ul>
+      <li>Начало: 5 минут медленной ходьбы</li>
+      <li>Частота: 2-3 раза в день</li>
+</ul>
+
+    <h4>Место: В помещении или на улице (при хорошей погоде)</li>
+    <h4>Упражнения сидя:</h4>
+    <ul>
+      <li>Круговые движения плечами (10 раз)</li>
+      <li>Сгибание-разгибание рук (10 раз)</li>
+</ul>
+
+    <h4>Поднимание коленей поочерёдно (10 раз каждой ногой)</li>
+    <h4>Дыхательные упражнения:</h4>
+    <ul>
+      <li>3-4 раза в день по 10 минут</li>
+  </div>
+
+  <div class="lesson-box">
+    <h3>НЕДЕЛЯ 3-4: Увеличение нагрузки</h3>
+    <h4>Ходьба:</h4>
+    <ul>
+      <li>Продолжительность: 10-15 минут</li>
+      <li>Частота: 2 раза в день</li>
+</ul>
+
+    <h4>Темп: Умеренный (можете разговаривать, но не петь)</li>
+    <h4>Упражнения стоя:</h4>
+    <ul>
+      <li>Приседания с опорой (5-10 раз)</li>
+      <li>Подъём на носки (10-15 раз)</li>
+</ul>
+
+    <h4>Махи руками в стороны (10 раз)</li>
+    <h4>Растяжка:</h4>
+    <ul>
+      <li>После каждой тренировки 5-10 минут</li>
+  </div>
+
+  <div class="lesson-box">
+    <h3>НЕДЕЛЯ 5-8: Умеренная активность</h3>
+    <h4>Ходьба:</h4>
+    <ul>
+      <li>20-30 минут непрерывно</li>
+      <li>5-6 дней в неделю</li>
+</ul>
+
+    <h4>Можно добавить лёгкие подъёмы</li>
+    <h4>Силовые упражнения:</h4>
+    <ul>
+      <li>Упражнения с лёгкими гантелями (0.5-1 кг)</li>
+      <li>Упражнения с эластичной лентой</li>
+</ul>
+
+    <h4>2-3 раза в неделю</li>
+    <h4>Пример программы:</h4>
+    <ul>
+      <li>Понедельник: Ходьба 30 мин</li>
+      <li>Вторник: Силовые упражнения 20 мин</li>
+</ul>
+
+    <h4>Среда: Ходьба 30 мин</li>
+      <li>Четверг: Отдых или лёгкая растяжка</li>
+</ul>
+
+    <h4>Пятница: Ходьба 30 мин</li>
+      <li>Суббота: Силовые упражнения 20 мин</li>
+</ul>
+
+    <h4>Воскресенье: Активный отдых (прогулка в парке)</li>
+  </div>
+
+  <div class="lesson-box">
+    <h3>НЕДЕЛЯ 9-12: Активная реабилитация</h3>
+    <h4>Аэробные нагрузки:</h4>
+    <ul>
+      <li>Ходьба 30-45 минут</li>
+      <li>Можно добавить велотренажёр (начать с 10 минут)</li>
+</ul>
+
+    <h4>Интенсивность: 60-70% от максимального пульса</li>
+    <h4>Расчёт максимального пульса:</h4>
+    <p>220 - возраст = максимальный пульс</p>
+    <p>Пример: 220 - 60 = 160 ударов/мин</p>
+    <p>60-70% = 96-112 ударов/мин</p>
+    <h4>Силовые тренировки:</h4>
+    <ul>
+      <li>Увеличение веса гантелей до 1-2 кг</li>
+      <li>Добавление новых упражнений</li>
+</ul>
+
+    <h4>3 раза в неделю</li>
+  </div>
+
+  <div class="lesson-box">
+    <h3>Конкретные упражнения</h3>
+    <h4>Комплекс утренней зарядки (15 минут):</h4>
+    <p>1. Разминка шеи (2 мин)</p>
+    <ul>
+      <li>Наклоны головы вперёд-назад (10 раз)</li>
+      <li>Повороты головы влево-вправо (10 раз)</li>
+    </ul>
+    <p>2. Плечи (3 мин)</p>
+    <ul>
+      <li>Круговые движения вперёд (15 раз)</li>
+      <li>Круговые движения назад (15 раз)</li>
+</ul>
+
+    <h4>Подъёмы плеч вверх (15 раз)</li>
+    </ul>
+    <p>3. Руки (3 мин)</p>
+    <ul>
+      <li>Сгибание в локтях (15 раз)</li>
+      <li>Разведение в стороны (15 раз)</li>
+    </ul>
+    <p>4. Корпус (4 мин)</p>
+    <ul>
+      <li>Наклоны в стороны (10 раз)</li>
+      <li>Повороты корпуса (10 раз)</li>
+</ul>
+
+    <h4>Круговые движения тазом (10 раз)</li>
+    </ul>
+    <p>5. Ноги (3 мин)</p>
+    <ul>
+      <li>Подъём колена к груди (10 раз каждой)</li>
+      <li>Махи ногой вперёд (10 раз каждой)</li>
+</ul>
+
+    <h4>Перекаты с носка на пятку (20 раз)</li>
+    <h4>Растяжка (10 минут после тренировки):</h4>
+    <ul>
+      <li>Растяжка плеч (30 сек каждое)</li>
+      <li>Растяжка грудных мышц (30 сек)</li>
+</ul>
+
+    <h4>Растяжка спины (1 мин)</li>
+      <li>Растяжка ног (30 сек каждая)</li>
+  </div>
+
+  <div class="lesson-box">
+    <h3>Признаки опасности — ПРЕКРАТИТЕ упражнение:</h3>
+    <p>❗ Сильная одышка (не можете говорить)</p>
+    <p>❗ Боль в груди</p>
+    <p>❗ Головокружение или предобморочное состояние</p>
+    <p>❗ Тошнота</p>
+    <p>❗ Нерегулярное сердцебиение</p>
+    <p>❗ Резкая слабость</p>
+    <p>❗ Падение сатурации кислорода ниже 90%</p>
+  </div>
+
+  <div class="lesson-box">
+    <h3>Целевые показатели через 12 недель:</h3>
+    <p>1. Ходьба 45 минут без остановки</p>
+    <p>2. Пульс в покое 60-80 ударов/мин</p>
+    <p>3. Одышка только при интенсивной нагрузке</p>
+    <p>4. Возможность подняться на 2-3 этажа</p>
+    <p>5. Возврат к повседневным активностям</p>
+  </div>
+
+  <div class="lesson-box">
+    <h3>Дополнительные виды активности:</h3>
+    <h4>Приветствуются:</h4>
+    <ul>
+      <li>Плавание (после заживления ран)</li>
+      <li>Йога (адаптированная)</li>
+</ul>
+
+    <h4>Тай-чи</li>
+      <li>Скандинавская ходьба</li>
+</ul>
+
+    <h4>Танцы</li>
+    <h4>Избегать:</h4>
+    <ul>
+      <li>Контактные виды спорта</li>
+      <li>Тяжёлая атлетика</li>
+</ul>
+
+    <h4>Интенсивный бег</li>
+      <li>Прыжки</li>
+    </ul>
+    
+  </div>
+
+  
+  <div style="text-align:center; margin-top:40px;">
+    <button class="btn" onclick="markLessonComplete(3)">
+      Отметить урок как пройденный
+    </button>
+  </div>
+
+  <div style="margin-top:40px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px;">
+    <a href="education.html" class="btn" style="background:white; color:var(--primary); border:2px solid var(--primary);">
+      ← Назад к курсу
+    </a>
+    <a href="lesson4.html" class="btn">
+      Следующий урок →
+    </a>
+  </div>
+
+</section>
+
+<script src="progress.js"></script>
+<script src="menu.js"></script>
+<script>
+async function markLessonComplete(lessonNumber) {
+  checkAuth();
+  try {
+    const response = await fetch('/api/lesson/complete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lesson_number: lessonNumber })
+    });
+    
+    if (response.ok) {
+      showToast(`Урок ${lessonNumber} отмечен как пройденный!`);
+    } else {
+      showToast('Ошибка сохранения прогресса');
+    }
+  } catch (error) {
+    console.error('Ошибка:', error);
+    showToast('Ошибка соединения с сервером');
+  }
+}
+
+function showToast(message) {
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.innerText = message;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.classList.add("show"), 100);
+  setTimeout(() => toast.remove(), 3000);
+}
+</script>
+</body>
+</html>

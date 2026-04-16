@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Новость — Реабилитация лёгких</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="auth-check.js"></script>
+  <style>
+  body{
+    background-image: url("https://cdn.pixabay.com/photo/2016/10/16/22/32/news-1746491_1280.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+
+  /* затемнение фона */
+  body::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55); /* сделай 0.45-0.75 если надо темнее/светлее */
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* чтобы основной контент был на светлом фоне (карточки и текст) */
+  .container{
+    position: relative;
+    z-index: 1;
+  }
+
+  /* читаемый заголовок */
+  .news-title{
+    text-align:center;
+    margin: 22px 0 14px;
+    color: #fff;
+    text-shadow: 0 6px 20px rgba(0,0,0,0.65);
+    font-weight: 900;
+    letter-spacing: 2px;
+    font-size: 40px;
+  }
+
+  .news-subtitle{
+    text-align:center;
+    color: rgba(255,255,255,0.88);
+    text-shadow: 0 6px 20px rgba(0,0,0,0.55);
+    margin: 0 0 26px;
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header-inner">
+    <div class="logo">
+      <a href="index.html">Реабилитация лёгких</a>
+    </div>
+    <nav class="nav">
+      <a href="index.html">Главная</a>
+      <a href="education.html">Обучение</a>
+      <a href="news.html">Новости</a>
+      <a href="profile.html">Личный кабинет</a>
+    </nav>
+    <div class="burger" onclick="toggleMenu()">☰</div>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Главная</a>
+    <a href="education.html">Обучение</a>
+    <a href="news.html">Новости</a>
+    <a href="profile.html">Личный кабинет</a>
+  </div>
+</header>
+
+<section class="container" style="max-width:900px; padding: 80px 20px 60px;">
+  <a href="news.html" class="btn" style="display:inline-block; margin-bottom:30px; background:white; color:var(--primary); border:2px solid var(--primary);">
+    ← Назад к новостям
+  </a>
+  
+  <article class="material-card" style="overflow:hidden;">
+    <img id="newsImage" src="" alt="" style="width: 100%; height: 400px; object-fit: cover; border-radius: 8px 8px 0 0;">
+    <div class="content" style="padding: 40px;">
+      <span class="category" style="background: #e0f2fe; color: #0369a1; padding: 6px 16px; border-radius: 12px; font-size: 14px; font-weight: 600;">Новости</span>
+      <h1 id="newsTitle" style="margin-top:20px; font-size: 32px; line-height: 1.3; color: var(--dark);"></h1>
+      <p id="newsDate" style="color:#64748b; margin-top:12px; font-size: 14px;"></p>
+      <div id="newsBody" style="margin-top: 30px; line-height: 1.8; color: #334155;"></div>
+    </div>
+  </article>
+
+  <div style="margin-top: 40px; text-align: center;">
+    <a href="news.html" class="btn">← Вернуться к списку новостей</a>
+  </div>
+</section>
+
+<footer style="background: #f8fafc; padding: 40px 0; margin-top: 60px;">
+  <div class="container" style="text-align: center; color: #64748b;">
+    © 2026 Образовательная платформа по реабилитации лёгких
+  </div>
+</footer>
+
+<script src="news-data.js"></script>
+<script>
+checkAuth();
+
+const params = new URLSearchParams(location.search);
+const id = params.get('id');
+const item = (window.NEWS || []).find(n => n.id === id);
+
+const titleEl = document.getElementById('newsTitle');
+const dateEl = document.getElementById('newsDate');
+const bodyEl = document.getElementById('newsBody');
+const imgEl = document.getElementById('newsImage');
+
+if (!item) {
+  document.title = 'Новость не найдена';
+  titleEl.textContent = 'Новость не найдена';
+  dateEl.textContent = '';
+  bodyEl.innerHTML = '<p style="color: #64748b;">К сожалению, новость не найдена. Вернитесь назад и выберите другую новость.</p>';
+  imgEl.style.display = 'none';
+} else {
+  document.title = item.title + ' — Реабилитация лёгких';
+  titleEl.textContent = item.title || '';
+  
+  const formattedDate = item.date ? new Date(item.date).toLocaleDateString('ru-RU', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }) : '';
+  dateEl.textContent = formattedDate;
+  
+  imgEl.src = item.image || 'https://images.pexels.com/photos/4225880/pexels-photo-4225880.jpeg';
+  imgEl.alt = item.title || '';
+  bodyEl.innerHTML = item.content || '';
+}
+</script>
+<script src="menu.js"></script>
+
+</body>
+</html>

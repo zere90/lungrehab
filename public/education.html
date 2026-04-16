@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Обучение — Реабилитация лёгких</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="auth-check.js"></script>
+  <style>
+    body {
+      background-image: url("https://cdn.pixabay.com/photo/2020/02/13/05/53/coronavirus-4844592_1280.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* БЕЛЫЙ ТЕКСТ! */
+    .section-title {
+      color: #ffffff !important;
+      text-shadow: 0 6px 20px rgba(0,0,0,0.9);
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header-inner">
+    <div class="logo">
+      <a href="index.html">Реабилитация лёгких</a>
+    </div>
+    <nav class="nav">
+      <a href="index.html">Главная</a>
+      <a href="education.html">Обучение</a>
+      <a href="news.html">Новости</a>
+      <a href="profile.html">Личный кабинет</a>
+    </nav>
+    <div class="burger" onclick="toggleMenu()">☰</div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Главная</a>
+    <a href="education.html">Обучение</a>
+    <a href="news.html">Новости</a>
+    <a href="profile.html">Личный кабинет</a>
+  </div>
+</header>
+
+<section class="container" style="padding: 80px 0;">
+  <h1 class="section-title">Образовательный курс</h1>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-number">1</div>
+      <h3>Введение в реабилитацию</h3>
+      <p>Основы восстановления после лечения рака лёгких</p>
+      <a href="lesson1.html" class="btn">Начать урок →</a>
+    </div>
+
+    <div class="card">
+      <div class="card-number">2</div>
+      <h3>Дыхательные упражнения</h3>
+      <p>Методы улучшения функции лёгких</p>
+      <a href="lesson2.html" class="btn">Начать урок →</a>
+    </div>
+
+    <div class="card">
+      <div class="card-number">3</div>
+      <h3>Физическая активность</h3>
+      <p>Безопасные упражнения и рекомендации</p>
+      <a href="lesson3.html" class="btn">Начать урок →</a>
+    </div>
+
+    <div class="card">
+      <div class="card-number">4</div>
+      <h3>Питание и восстановление</h3>
+      <p>Нутриционная поддержка в период восстановления</p>
+      <a href="lesson4.html" class="btn">Начать урок →</a>
+    </div>
+
+    <div class="card">
+      <div class="card-number">5</div>
+      <h3>Управление симптомами</h3>
+      <p>Самоконтроль и решение проблем</p>
+      <a href="lesson5.html" class="btn">Начать урок →</a>
+    </div>
+
+    <div class="card">
+      <div class="card-number">6</div>
+      <h3>Психологическое здоровье</h3>
+      <p>Стратегии адаптации и снижение стресса</p>
+      <a href="lesson6.html" class="btn">Начать урок →</a>
+    </div>
+
+    <div class="card">
+      <div class="card-number">7</div>
+      <h3>План восстановления</h3>
+      <p>Долгосрочная стратегия и цели</p>
+      <a href="lesson7.html" class="btn">Начать урок →</a>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 40px;">
+    <a href="test.html" class="btn" style="font-size: 18px; padding: 15px 30px;">
+      ✅ Пройти итоговый тест
+    </a>
+  </div>
+</section>
+
+<script src="menu.js"></script>
+<script>
+  checkAuth();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Урок 2 — Дыхательные упражнения</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="auth-check.js"></script>
+
+  <style>
+    body{
+      background-image: url("https://cdn.pixabay.com/photo/2020/02/13/05/53/coronavirus-4844592_1280.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+      body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    pointer-events: none;
+    z-index: -1;
+  }
+    /* чуть затемним фон под контентом, чтобы текст читался */
+    .lesson-box{
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(4px);
+    }
+  
+    /* БЕЛЫЙ ТЕКСТ НА ТЕМНОМ ФОНЕ */
+    .section-title {
+      color: #ffffff !important;
+      text-shadow: 0 6px 20px rgba(0,0,0,0.9);
+    }
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container header-inner">
+    <div class="logo">
+      <a href="index.html">Реабилитация лёгких</a>
+    </div>
+
+    <nav class="nav">
+      <a href="index.html">Главная</a>
+      <a href="education.html">Обучение</a>
+      <a href="news.html">Новости</a>
+      <a href="profile.html">Личный кабинет</a>
+    </nav>
+
+    <div class="burger" onclick="toggleMenu()">☰</div>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Главная</a>
+    <a href="education.html">Обучение</a>
+    <a href="news.html">Новости</a>
+    <a href="profile.html">Личный кабинет</a>
+  </div>
+</header>
+
+<section class="container" style="padding:80px 0;">
+  <h1 class="section-title">Урок 2. Дыхательные упражнения</h1>
+
+  <div class="lesson-box">
+    <h3>🎯 Цели урока</h3>
+    <ul>
+      <li>Освоить базовые дыхательные техники</li>
+      <li>Понять принципы работы дыхательной системы</li>
+      <li>Научиться правильно выполнять упражнения</li>
+    </ul>
+  </div>
+
+  <div class="lesson-box">
+    <h3>1. Диафрагмальное дыхание</h3>
+    <h4>Как выполнять:</h4>
+    <ul>
+      <li>Лягте на спину: одна рука на груди, другая на животе</li>
+      <li>Медленный вдох через нос (≈ 4 секунды)</li>
+      <li>При вдохе живот поднимается, грудь остаётся почти неподвижной</li>
+      <li>Медленный выдох через рот (≈ 6 секунд)</li>
+      <li>Повторять 10–15 раз, 3–4 раза в день</li>
+    </ul>
+
+    <h4>Польза:</h4>
+    <ul>
+      <li>Укрепляет диафрагму</li>
+      <li>Увеличивает объём вдыхаемого воздуха</li>
+      <li>Улучшает газообмен в нижних отделах лёгких</li>
+    </ul>
+  </div>
+
+  <div class="lesson-box">
+    <h3>2. Дыхание с сопротивлением (pursed-lip breathing)</h3>
+    <h4>Как выполнять:</h4>
+    <ul>
+      <li>Вдох через нос (≈ 2 секунды)</li>
+      <li>Выдох через сомкнутые губы (≈ 4–6 секунд)</li>
+      <li>Губы сложены так, как будто задуваете свечу</li>
+      <li>Повторять 5–10 минут</li>
+    </ul>
+
+    <h4>Польза:</h4>
+    <ul>
+      <li>Предотвращает «схлопывание» мелких дыхательных путей</li>
+      <li>Увеличивает время выдоха</li>
+      <li>Снижает работу дыхания</li>
+      <li>Уменьшает одышку</li>
+    </ul>
+  </div>
+
+  <div class="lesson-box">
+    <h3>3. Сегментарное дыхание</h3>
+
+    <h4>Верхнегрудное</h4>
+    <ul>
+      <li>Руки на верхней части груди</li>
+      <li>Концентрация на расширении верхних рёбер</li>
+      <li>Медленный вдох–выдох</li>
+    </ul>
+
+    <h4>Среднегрудное</h4>
+    <ul>
+      <li>Руки на боковых поверхностях грудной клетки</li>
+      <li>Концентрация на расширении средних отделов</li>
+      <li>Медленный вдох–выдох</li>
+    </ul>
+
+    <h4>Нижнегрудное</h4>
+    <ul>
+      <li>Руки на нижних рёбрах</li>
+      <li>Концентрация на расширении нижних отделов</li>
+      <li>Медленный вдох–выдох</li>
+    </ul>
+  </div>
+
+  <div class="lesson-box">
+    <h3>4. Спирометрия стимулирующая</h3>
+    <h4>Использование устройства:</h4>
+    <ul>
+      <li>Вдох через мундштук</li>
+      <li>Постараться поднять шарик/поршень максимально высоко</li>
+      <li>Задержка дыхания на 3–5 секунд</li>
+      <li>Медленный выдох</li>
+      <li>Повторять 10 раз каждый час (во время бодрствования)</li>
+    </ul>
+    <p><strong>Цель:</strong> увеличение дыхательного объёма и профилактика ателектазов.</p>
+  </div>
+
+  <div class="lesson-box">
+    <h3>5. Дренажные позиции</h3>
+
+    <h4>Для верхних долей</h4>
+    <ul>
+      <li>Сидя с наклоном назад ≈ 30°</li>
+      <li>Глубокие вдохи с кашлевыми толчками</li>
+    </ul>
+
+    <h4>Для нижних долей</h4>
+    <ul>
+      <li>Лёжа на боку с приподнятым ножным концом</li>
+      <li>Перкуссия (постукивание) помощником (если это допустимо врачом)</li>
+    </ul>
+
+    <h4>График выполнения</h4>
+    <ul>
+      <li>Утром после пробуждения</li>
+      <li>Перед сном</li>
+      <li>По необходимости при скоплении мокроты</li>
+    </ul>
+  </div>
+
+  <div class="lesson-box">
+    <h3>Техника откашливания</h3>
+
+    <h4>Эффективное откашливание:</h4>
+    <ol>
+      <li>Сесть прямо</li>
+      <li>Глубокий вдох через нос</li>
+      <li>Задержка дыхания на 3 секунды</li>
+      <li>Сильный кашлевой толчок с наклоном вперёд</li>
+      <li>Повторить 2–3 раза</li>
+    </ol>
+
+    <h4>Хаффинг (форсированный выдох):</h4>
+    <ul>
+      <li>Менее травматичная альтернатива кашлю</li>
+      <li>Быстрый выдох с открытым ртом («ха-ха-ха»)</li>
+      <li>Эффективно очищает дыхательные пути</li>
+    </ul>
+  </div>
+
+  <div class="lesson-box">
+    <h3>Важные правила</h3>
+    <ul>
+      <li><strong>Регулярность:</strong> выполняйте упражнения ежедневно</li>
+      <li><strong>Постепенность:</strong> начинайте с 5 минут, увеличивайте до 15–20</li>
+      <li><strong>Контроль:</strong> следите за пульсом и сатурацией кислорода</li>
+      <li><strong>Комфорт:</strong> при головокружении — остановитесь и отдохните</li>
+    </ul>
+  </div>
+
+  <div class="lesson-box">
+    <h3>Противопоказания</h3>
+    <ul>
+      <li>❗ Кровохарканье</li>
+      <li>❗ Пневмоторакс</li>
+      <li>❗ Острая боль в груди</li>
+      <li>❗ Высокая температура</li>
+      <li>❗ Резкое ухудшение состояния</li>
+    </ul>
+  </div>
+
+  <!-- КНОПКИ ТОЛЬКО ДЛЯ УРОКА 2 -->
+  <div style="text-align:center; margin-top:40px;">
+    <button class="btn" onclick="markLessonComplete(2)">
+      Отметить урок как пройденный
+    </button>
+  </div>
+
+  <div class="lesson-nav" style="margin-top:60px; display:flex; justify-content:space-between; gap:15px; flex-wrap:wrap;">
+    <a href="education.html" class="btn" style="background:white; color:var(--primary); border:2px solid var(--primary);">
+      ← Назад к курсу
+    </a>
+    <a href="lesson3.html" class="btn">
+      Следующий урок →
+    </a>
+  </div>
+
+</section>
+
+<script src="progress.js"></script>
+<script src="menu.js"></script>
+
+<script>
+  // Проверка логина при открытии страницы
+  checkAuth();
+
+  async function markLessonComplete(lessonNumber) {
+    try {
+      const response = await fetch('/api/lesson/complete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ lesson_number: lessonNumber })
+      });
+
+      if (response.ok) {
+        showToast('Урок отмечен как пройденный!');
+      } else {
+        showToast('Ошибка сохранения прогресса');
+      }
+    } catch (error) {
+      console.error('Ошибка:', error);
+      showToast('Ошибка соединения с сервером');
+    }
+  }
+
+  function showToast(message) {
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.innerText = message;
+    document.body.appendChild(toast);
+
+    setTimeout(() => toast.classList.add("show"), 100);
+    setTimeout(() => toast.remove(), 3000);
+  }
+</script>
+
+</body>
+</html>

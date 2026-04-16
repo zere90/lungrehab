@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Результат теста</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="menu.js" defer></script>
+  <script src="auth-check.js" defer></script>
+  <style>
+    .result-page {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f8fbff 0%, #eef6ff 100%);
+      padding: 40px 20px;
+    }
+
+    .result-card {
+      max-width: 760px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 12px 40px rgba(31, 61, 136, 0.12);
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    .result-badge {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .result-badge.pass {
+      background: #e8f8ee;
+      color: #1f7a3d;
+    }
+
+    .result-badge.fail {
+      background: #fff1f1;
+      color: #b42318;
+    }
+
+    .result-title {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #183b56;
+    }
+
+    .result-subtitle {
+      font-size: 18px;
+      color: #486581;
+      margin-bottom: 28px;
+    }
+
+    .score-box {
+      background: #f7faff;
+      border: 1px solid #dbe7f3;
+      border-radius: 20px;
+      padding: 28px;
+      margin: 24px 0;
+    }
+
+    .score-value {
+      font-size: 54px;
+      font-weight: 800;
+      color: #1565c0;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .score-label {
+      font-size: 18px;
+      color: #334e68;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin: 28px 0;
+      text-align: left;
+    }
+
+    .detail-item {
+      background: #f9fbfd;
+      border: 1px solid #e6edf5;
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .detail-item strong {
+      display: block;
+      font-size: 14px;
+      color: #627d98;
+      margin-bottom: 8px;
+    }
+
+    .detail-item span {
+      font-size: 20px;
+      font-weight: 700;
+      color: #102a43;
+    }
+
+    .result-message {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #243b53;
+      line-height: 1.6;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      margin-top: 32px;
+    }
+
+    .btn-main,
+    .btn-secondary {
+      text-decoration: none;
+      padding: 14px 22px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn-main {
+      background: #1565c0;
+      color: white;
+    }
+
+    .btn-main:hover {
+      background: #0f4f98;
+    }
+
+    .btn-secondary {
+      background: #eef4fb;
+      color: #1f3d88;
+    }
+
+    .btn-secondary:hover {
+      background: #dfeaf7;
+    }
+
+    .loading,
+    .error {
+      text-align: center;
+      font-size: 18px;
+      color: #334e68;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+  <div class="container header-inner">
+    <div class="logo">
+      <a href="index.html">Реабилитация лёгких</a>
+    </div>
+    <nav class="nav">
+      <a href="index.html">Главная</a>
+      <a href="education.html">Обучение</a>
+      <a href="news.html">Новости</a>
+      <a href="profile.html">Личный кабинет</a>
+    </nav>
+    <div class="burger" onclick="toggleMenu()">☰</div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Главная</a>
+    <a href="education.html">Обучение</a>
+    <a href="news.html">Новости</a>
+    <a href="profile.html">Личный кабинет</a>
+  </div>
+</header>
+
+  <main class="result-page">
+    <div class="result-card" id="resultCard">
+      <div class="loading">Загрузка результата...</div>
+    </div>
+  </main>
+
+  <script>
+    async function loadResult() {
+      const card = document.getElementById('resultCard');
+
+      try {
+        const [userRes, resultsRes] = await Promise.all([
+          fetch('/api/user', { credentials: 'include' }),
+          fetch('/api/test/results', { credentials: 'include' })
+        ]);
+
+        if (userRes.status === 401 || resultsRes.status === 401) {
+          window.location.href = 'auth.html';
+          return;
+        }
+
+        if (!userRes.ok || !resultsRes.ok) {
+          throw new Error('Не удалось получить данные');
+        }
+
+        const user = await userRes.json();
+        const resultsData = await resultsRes.json();
+        const latestResult = resultsData.results?.[0];
+
+        if (!latestResult) {
+          card.innerHTML = `
+            <div class="result-title">Результат пока отсутствует</div>
+            <p class="result-subtitle">Вы ещё не прошли итоговый тест.</p>
+            <div class="actions">
+              <a class="btn-main" href="test.html">Пройти тест</a>
+              <a class="btn-secondary" href="profile.html">В личный кабинет</a>
+            </div>
+          `;
+          return;
+        }
+
+        const score = latestResult.score ?? 0;
+        const total = latestResult.total_questions ?? 7;
+        const passed = !!latestResult.passed;
+        const percent = Math.round((score / total) * 100);
+
+        const date = latestResult.taken_at
+          ? new Date(latestResult.taken_at).toLocaleString('ru-RU')
+          : 'Не указано';
+
+        card.innerHTML = `
+          <div class="result-badge ${passed ? 'pass' : 'fail'}">
+            ${passed ? 'Тест пройден' : 'Тест не пройден'}
+          </div>
+
+          <h1 class="result-title">Результат теста</h1>
+          <p class="result-subtitle">
+            ${user.full_name || user.username || 'Пользователь'}, здесь показан ваш текущий итог.
+          </p>
+
+          <div class="score-box">
+            <div class="score-value">${score} / ${total}</div>
+            <div class="score-label">Правильных ответов</div>
+          </div>
+
+          <div class="details-grid">
+            <div class="detail-item">
+              <strong>Процент выполнения</strong>
+              <span>${percent}%</span>
+            </div>
+            <div class="detail-item">
+              <strong>Дата прохождения</strong>
+              <span style="font-size:16px;">${date}</span>
+            </div>
+            <div class="detail-item">
+              <strong>Статус</strong>
+              <span>${passed ? 'Успешно' : 'Нужно повторить'}</span>
+            </div>
+          </div>
+
+          <p class="result-message">
+            ${
+              passed
+                ? 'Поздравляем! Вы успешно завершили итоговое тестирование.'
+                : 'Вы можете пройти тест ещё раз после повторения материалов курса.'
+            }
+          </p>
+
+          <div class="actions">
+            <a class="btn-main" href="profile.html">В личный кабинет</a>
+            <a class="btn-secondary" href="education.html">К урокам</a>
+            ${!passed ? '<a class="btn-secondary" href="test.html">Пройти тест снова</a>' : ''}
+          </div>
+        `;
+      } catch (error) {
+        card.innerHTML = `
+          <div class="error">
+            Не удалось загрузить результат. Попробуйте позже.
+          </div>
+          <div class="actions">
+            <a class="btn-main" href="profile.html">В личный кабинет</a>
+          </div>
+        `;
+        console.error(error);
+      }
+    }
+
+    loadResult();
+  </script>
+</body>
+</html>

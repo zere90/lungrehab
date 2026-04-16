@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Личный кабинет</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="auth-check.js"></script>
+  <style>
+    body {
+      background-image: url("https://cdn.pixabay.com/photo/2020/02/13/05/53/coronavirus-4844592_1280.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-title {
+      text-align: center;
+      margin: 22px 0 14px;
+      color: #fff;
+      text-shadow: 0 6px 20px rgba(0,0,0,0.65);
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      font-size: 34px;
+    }
+
+    .result-history-item {
+      border: 1px solid #e3e8ef;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      background: #f9fbff;
+    }
+
+    .result-history-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .result-history-top strong {
+      color: #1E3A8A;
+    }
+
+    .result-history-meta {
+      color: #555;
+      font-size: 14px;
+    }
+
+    .result-status-pass {
+      color: #2e7d32;
+      font-weight: bold;
+    }
+
+    .result-status-fail {
+      color: #c62828;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="index.html">Реабилитация лёгких</a>
+      </div>
+
+      <nav class="nav">
+        <a href="index.html">Главная</a>
+        <a href="education.html">Обучение</a>
+        <a href="news.html">Новости</a>
+        <a href="profile.html" class="active">Личный кабинет</a>
+      </nav>
+
+      <div class="burger" onclick="toggleMenu()">☰</div>
+    </div>
+
+    <div class="mobile-nav" id="mobileNav">
+      <a href="index.html">Главная</a>
+      <a href="education.html">Обучение</a>
+      <a href="news.html">Новости</a>
+      <a href="profile.html">Личный кабинет</a>
+    </div>
+  </header>
+
+  <section class="container" style="padding:80px 0;">
+
+    <h1 class="section-title">Личный кабинет</h1>
+
+    <div class="card" style="margin-bottom:30px;">
+      <h3>Пользователь</h3>
+      <p><strong>Имя:</strong> <span id="userName">Загрузка...</span></p>
+      <p><strong>Email:</strong> <span id="userEmail">Загрузка...</span></p>
+      <p><strong>Статус курса:</strong> <span id="courseStatus">Загрузка...</span></p>
+    </div>
+
+    <div class="card" style="margin-bottom:30px;">
+      <h3>Прогресс обучения</h3>
+
+      <div class="progress-bar" style="width: 100%; height: 30px; background: #E3F2FD; border-radius: 15px; overflow: hidden; margin: 20px 0;">
+        <div id="progressFill" style="height: 100%; background: #1E88E5; width: 0%; transition: width 0.3s;"></div>
+      </div>
+
+      <p id="progressText" style="font-size: 18px; font-weight: bold; color: #1E88E5;">Пройдено уроков: 0 из 7</p>
+
+      <div id="resultSection" style="margin-top: 20px; display: none;">
+        <p style="color: #2e7d32;">✅ Итоговый тест пройден</p>
+        <a href="certificate.html" class="btn">Посмотреть результат</a>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:30px;">
+      <h3>История результатов теста</h3>
+      <div id="testResultsList">
+        <p>Загрузка результатов...</p>
+      </div>
+    </div>
+
+  </section>
+
+  <script src="menu.js"></script>
+  <script>
+    checkAuth();
+
+    async function loadUserProfile() {
+      try {
+        const userResponse = await fetch('/api/user');
+        if (!userResponse.ok) {
+          window.location.href = 'auth.html';
+          return;
+        }
+
+        const user = await userResponse.json();
+
+        document.getElementById('userName').textContent = user.full_name || user.username || 'Не указано';
+        document.getElementById('userEmail').textContent = user.email || 'Не указано';
+
+        const progressResponse = await fetch('/api/progress');
+        if (progressResponse.ok) {
+          const progress = await progressResponse.json();
+          const completed = progress.filter(p => p.completed).length;
+          const total = 7;
+          const percent = (completed / total) * 100;
+
+          document.getElementById('progressFill').style.width = percent + '%';
+          document.getElementById('progressText').textContent = `Пройдено уроков: ${completed} из ${total}`;
+
+          if (completed === total) {
+            const testResponse = await fetch('/api/test/results');
+            if (testResponse.ok) {
+              const testData = await testResponse.json();
+              const passedTest = testData.results?.find(r => r.passed);
+
+              if (passedTest) {
+                document.getElementById('courseStatus').textContent = 'Завершён ✅';
+                document.getElementById('resultSection').style.display = 'block';
+              } else {
+                document.getElementById('courseStatus').textContent = 'Тест не пройден';
+              }
+            } else {
+              document.getElementById('courseStatus').textContent = 'Требуется тест';
+            }
+          } else {
+            document.getElementById('courseStatus').textContent = `В процессе (${completed}/7)`;
+          }
+        }
+
+      } catch (error) {
+        console.error('Ошибка загрузки профиля:', error);
+        document.getElementById('userName').textContent = 'Ошибка загрузки';
+        document.getElementById('userEmail').textContent = 'Ошибка загрузки';
+        document.getElementById('courseStatus').textContent = 'Ошибка загрузки';
+      }
+    }
+
+    async function loadTestResults() {
+      const container = document.getElementById('testResultsList');
+
+      try {
+        const response = await fetch('/api/test/results');
+
+        if (!response.ok) {
+          container.innerHTML = '<p>Не удалось загрузить результаты теста.</p>';
+          return;
+        }
+
+        const data = await response.json();
+        const results = data.results || [];
+
+        if (results.length === 0) {
+          container.innerHTML = '<p>Вы ещё не проходили итоговый тест.</p>';
+          return;
+        }
+
+        container.innerHTML = results.map((result, index) => {
+          const date = result.taken_at
+            ? new Date(result.taken_at).toLocaleString('ru-RU')
+            : 'Не указано';
+
+          return `
+            <div class="result-history-item">
+              <div class="result-history-top">
+                <strong>Попытка ${results.length - index}</strong>
+                <span class="result-history-meta">${date}</span>
+              </div>
+
+              <p><strong>Результат:</strong> ${result.score} / ${result.total_questions}</p>
+              <p><strong>Статус:</strong> 
+                <span class="${result.passed ? 'result-status-pass' : 'result-status-fail'}">
+                  ${result.passed ? 'Успешно' : 'Не пройден'}
+                </span>
+              </p>
+            </div>
+          `;
+        }).join('');
+      } catch (error) {
+        console.error('Ошибка загрузки результатов:', error);
+        container.innerHTML = '<p>Ошибка загрузки результатов теста.</p>';
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadUserProfile();
+      loadTestResults();
+    });
+  </script>
+
+</body>
+</html>

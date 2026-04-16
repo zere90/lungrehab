@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Новости — Реабилитация лёгких</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="auth-check.js"></script>
+  <style>
+  body{
+    background-image: url("https://cdn.pixabay.com/photo/2016/10/16/22/32/news-1746491_1280.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+
+  /* затемнение фона */
+  body::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55); /* сделай 0.45-0.75 если надо темнее/светлее */
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* чтобы основной контент был на светлом фоне (карточки и текст) */
+  .container{
+    position: relative;
+    z-index: 1;
+  }
+
+  /* читаемый заголовок */
+  .news-title{
+    text-align:center;
+    margin: 22px 0 14px;
+    color: #fff;
+    text-shadow: 0 6px 20px rgba(0,0,0,0.65);
+    font-weight: 900;
+    letter-spacing: 2px;
+    font-size: 40px;
+  }
+
+  .news-subtitle{
+    text-align:center;
+    color: rgba(255,255,255,0.88);
+    text-shadow: 0 6px 20px rgba(0,0,0,0.55);
+    margin: 0 0 26px;
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header-inner">
+    <div class="logo">
+      <a href="index.html">Реабилитация лёгких</a>
+    </div>
+    <nav class="nav">
+      <a href="index.html">Главная</a>
+      <a href="education.html">Обучение</a>
+      <a href="news.html">Новости</a>
+      <a href="profile.html">Личный кабинет</a>
+    </nav>
+    <div class="burger" onclick="toggleMenu()">☰</div>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Главная</a>
+    <a href="education.html">Обучение</a>
+    <a href="news.html">Новости</a>
+    <a href="profile.html">Личный кабинет</a>
+  </div>
+</header>
+
+<section class="container" style="padding: 80px 0;">
+  <h1 style="text-align:center; color: whitesmoke; margin-bottom:18px;">
+    Новости и статьи
+  </h1>
+  <p style="text-align:center; color:wheat; margin-bottom:40px;">
+    Полезная информация о реабилитации и восстановлении
+  </p>
+  
+  <div class="materials-grid" id="newsGrid"></div>
+</section>
+
+<footer style="background: #f8fafc; padding: 40px 0; margin-top: 60px;">
+  <div class="container" style="text-align: center; color: #64748b;">
+    © 2026 Образовательная платформа по реабилитации лёгких
+  </div>
+</footer>
+
+<script src="news-data.js"></script>
+<script>
+checkAuth();
+
+const grid = document.getElementById('newsGrid');
+const items = (window.NEWS || []).slice().sort((a,b) => (b.date||"").localeCompare(a.date||""));
+
+if (!items.length) {
+  grid.innerHTML = '<p style="text-align:center; color:#64748b;">Пока нет новостей. Добавьте их в <b>news-data.js</b>.</p>';
+} else {
+  grid.innerHTML = items.map(n => {
+    const href = `news-article.html?id=${encodeURIComponent(n.id)}`;
+    const formattedDate = n.date ? new Date(n.date).toLocaleDateString('ru-RU', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }) : '';
+    
+    return `
+      <div class="material-card" data-type="news">
+        <img src="${n.image || 'https://images.pexels.com/photos/4225880/pexels-photo-4225880.jpeg'}" alt="${n.title || ''}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px 8px 0 0;">
+        <div class="content" style="padding: 20px;">
+          <span class="category" style="background: #e0f2fe; color: #0369a1; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600;">Новости</span>
+          <p style="color: #64748b; font-size: 14px; margin-top: 8px;">${formattedDate}</p>
+          <h3 style="margin-top: 12px; margin-bottom: 12px;">${n.title || ''}</h3>
+          <p style="color: #475569; line-height: 1.6;">${n.excerpt || ''}</p>
+          <a href="${href}" class="btn" style="display: inline-block; margin-top: 16px;">Читать полностью</a>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+</script>
+<script src="menu.js"></script>
+
+</body>
+</html>
